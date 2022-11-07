@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const userRoutes = require('./routes/users');
+const loginRoutes = require('./routes/login');
 const PORT = process.env.PORT||3000;
 
 dotenv.config()
@@ -11,8 +13,15 @@ mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true}, () => {
 });
 
 
+app.use(express.json());
+app.use(express.static('public'));
+app.use(express.urlencoded({extended: true}));
+
+app.use('/users', userRoutes);
+app.use('/login', loginRoutes);
+
 
 
 app.listen(PORT, () =>{
-    console.log(`Meat storage up and running on port ${PORT} 🍖🥩🍗`)
+    console.log(`Meat Locker up and running on port ${PORT} 🍖🥩🍗`)
 })
