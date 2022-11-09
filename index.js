@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const userRoutes = require('./routes/users.js');
 const registerRoutes = require('./routes/register.js');
 const loginRoutes = require('./routes/login.js');
+const postRoutes = require('./routes/posts.js')
 const PORT = process.env.PORT||3000;
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/users', userRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
+app.use('/posts', postRoutes);
 
 
 
