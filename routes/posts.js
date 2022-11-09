@@ -27,14 +27,17 @@ router.get("/:id", async (req, res) => {
     }
   });
 
+
 //GET POSTS FROM ALL USERS
+
+
 
 //UPDATE POST ROUTE
 router.put("/:id", async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      
-      if (post.userId === req.body.userId) {
+
+      if (post.username === req.body.username) {
         await post.updateOne({ $set: req.body });
         res.status(200).json("post updated");
       } else {
@@ -47,6 +50,21 @@ router.put("/:id", async (req, res) => {
   });
 
 //DELETE POST
+router.delete("/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (post.username === req.body.username) {
+      await post.deleteOne();
+      res.status(200).json("post deleted");
+    } else {
+      res.status(400).json("this was posted by another user");
+    }
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 //LIKE POST
 
