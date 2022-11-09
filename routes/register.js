@@ -2,6 +2,11 @@ const router = require('express').Router();
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
+//test
+router.get('/', async (req, res) => {
+    res.send('hello register')
+})
+
 router.post('/', async (req, res) => {
     try{
         const hashPass = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));

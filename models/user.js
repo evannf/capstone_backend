@@ -14,6 +14,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         default:''
     },
+    favoriteMeat:{
+        type: String
+    },
     isAdmin:{
         type: Boolean,
         default: false

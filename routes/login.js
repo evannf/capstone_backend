@@ -2,6 +2,11 @@ const router = require('express').Router();
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
+//test
+router.get('/', async (req, res) => {
+    res.send('hello login')
+})
+
 router.post('/', async (req, res) => {
     try {
         const user = await User.findOne({ 
