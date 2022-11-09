@@ -10,7 +10,10 @@ router.get('/', (req, res) => {
 router.get('/:id', async (req, res) => {
     try{
         const user = await User.findById(req.params.id);
-        res.status(200).json(user)
+        //create seperate objects from password and the rest of the document, now named 'public'
+        const {password, ...public} = user._doc
+        //return 'public' instead of 'user'
+        res.status(200).json(public)
     } catch (err) {
         res.status(500).json(err);
     }
