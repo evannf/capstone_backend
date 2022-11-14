@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Post = require('../models/post.js')
-
+const db = require("../models")
 //test
 router.get('/', async (req, res) => {
     res.send('hello posts')
@@ -17,6 +17,17 @@ router.post('/', async (req, res) => {
     }
 });
 
+// GET POSTS FROM ALL USERS
+router.get("/all", (req, res) => {
+  db.Post.find({}, (err, posts) => {
+    if (err) return res.status(400).json({ error: err.message });
+    return res.status(200).json({
+      posts
+    });
+  });
+})
+
+
 //GET SINGLE POST
 router.get("/:id", async (req, res) => {
     try {
@@ -27,8 +38,6 @@ router.get("/:id", async (req, res) => {
     }
   });
 
-
-//GET POSTS FROM ALL USERS
 
 
 
@@ -49,7 +58,7 @@ router.put("/:id", async (req, res) => {
     }
   });
 
-//DELETE POST
+//DELETE POST ROUTE
 router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -67,5 +76,17 @@ router.delete("/:id", async (req, res) => {
 });
 
 //LIKE POST
+router.put("/:id/like", async (req, res) => {
+  try{
+    const post = await Post.findById(req.params.id);
+    if (!post.likes.includes(req.body.username)) {
+      await post.updateOne({ $push: {likes: req.body.username}});
+      res.status(200).json('Post Liked')
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+})
+
 
 module.exports = router;
