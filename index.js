@@ -34,8 +34,8 @@ app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/posts', postRoutes);
 
-const Posts = require('./models/post.js');
-const Users = require('./models/user.js');
+// const Posts = require('./models/post.js');
+// const Users = require('./models/user.js');
 
 
 app.listen(PORT, () =>{
