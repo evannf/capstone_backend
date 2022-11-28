@@ -14,8 +14,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         default:''
     },
-    favoriteMeat:{
-        type: String
+    bio:{
+        type: String,
+        default: ""
     },
     isAdmin:{
         type: Boolean,
@@ -25,5 +26,3 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
-
-// module.exports = mongoose.model('User', userSchema);

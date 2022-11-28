@@ -3,9 +3,9 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
 //test
-router.get('/', async (req, res) => {
-    res.send('hello register')
-})
+// router.get('/', async (req, res) => {
+//     res.send('hello register')
+// })
 
 router.post('/', async (req, res) => {
     try{
