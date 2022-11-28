@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
     const username = req.query.username;
     try{
         const user = userId 
-          ? await User.findById(req.params.id) 
-          : await User.findOne({username: usernmame});
+          ? await User.findById(userId) 
+          : await User.findOne({ username: username });
 
         const {password, ...profile} = user._doc
 

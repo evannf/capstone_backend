@@ -11,8 +11,6 @@ router.post('/', async (req, res) => {
     try{
         const secretPass = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
-        //mongoose method save() used to create new or update documents
-        //https://mongoosejs.com/docs/documents.html#updating-using-save  
         const newUser = new User({
             username: req.body.username,
             password: secretPass,
