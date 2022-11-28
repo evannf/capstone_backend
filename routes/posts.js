@@ -105,11 +105,16 @@ router.put("/:id/like", async (req, res) => {
     if (!post.likes.includes(req.body.username)) {
       await post.updateOne({ $push: {likes: req.body.username}});
       res.status(200).json('Post Liked')
+    } else {
+      await post.updateOne({ $pull: { likes: req.body.username } });
+      res.status(200).json('Post unliked')
     }
   } catch (err) {
     res.status(400).json(err);
   }
 })
+
+
 
 
 module.exports = router;
