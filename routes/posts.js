@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Post = require('../models/post.js')
-const db = require("../models")
+const db = require("../models");
+const { User } = require('../models');
 // //test
 // router.get('/', async (req, res) => {
 //     res.send('posts')
@@ -40,6 +41,26 @@ router.get("/:id", async (req, res) => {
     
   });
 
+//  GET ALL POSTS FROM A SINGLE USER
+//  router.get("/profile/:username", async (req, res) => {
+
+//   try {
+//     const posts = Post.find({ username: req.params.username });
+//     res.status(200).json(posts)
+//   } catch (err) {
+//     res.status(400).json(err)
+//   }
+//  })
+
+ router.get("/profile/:username", async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username });
+    const posts = await Post.find({ userId: user._id });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 
