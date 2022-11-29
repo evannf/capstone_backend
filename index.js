@@ -34,10 +34,10 @@ app.use(express.urlencoded({extended: true}));
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "/public/images")
+    callback(null, "public/images")
   },
   filename: (req, res, callback) => {
-    callback(null, file.originalname)
+    callback(null, req.body.name)
   }
 })
 
