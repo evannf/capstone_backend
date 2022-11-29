@@ -7,10 +7,19 @@ const loginRoutes = require('./routes/login.js');
 const postRoutes = require('./routes/posts.js');
 const multer = require('multer');
 const path = require('path');
+const methodOverride  = require('method-override')
+const session = require('express-session')
 const PORT = process.env.PORT||3001;
 
 dotenv.config();
 require('./config/db.connection');
+
+// const SESSION_SECRET = process.env.SESSION_SECRET
+// app.use(session({
+// 	secret: SESSION_SECRET,
+// 	resave: false,
+// 	saveUninitialized: false
+// }))
 
 app.use("/images", express.static(path.join(__dirname, "public/images")))
 

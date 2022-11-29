@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 //     res.send('hello login')
 // })
 
+//LOGIN ROUTE
 router.post('/', async (req, res) => {
     try {
         const user = await User.findOne({ 
@@ -22,5 +23,22 @@ router.post('/', async (req, res) => {
         res.status(400).json(err)
     }
 });
+
+//LOGOUT ROUTE
+router.delete('/', async (req, res) => {
+    if (req.session) {
+        req.session.destroy (err => {
+          if (err) {
+            res.status(400).send('Unable to log out')
+          } else {
+            res.send('Logged Out')
+          }
+        });
+      } else {
+        res.end()
+      }
+    
+
+})
 
 module.exports = router
